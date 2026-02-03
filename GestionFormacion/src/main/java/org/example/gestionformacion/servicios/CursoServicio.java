@@ -14,9 +14,8 @@ public class CursoServicio {
     private CursoRepositorio cursoRepositorio;
 
     public Curso findById(Integer idCurso){
-        Curso curso = cursoRepositorio.findById(idCurso)
+        return cursoRepositorio.findById(idCurso)
                 .orElseThrow(()-> new RuntimeException("Ningun curso con este ID."));
-        return  curso;
     }
 
     public void crearCurso(Curso curso){
@@ -33,8 +32,7 @@ public class CursoServicio {
     }
 
     public List<Curso> listarCursos(){
-        List<Curso> listaCursos = cursoRepositorio.findAll();
-        return listaCursos;
+        return cursoRepositorio.findAll();
     }
 
     public void eliminarCurso(Integer idCurso){

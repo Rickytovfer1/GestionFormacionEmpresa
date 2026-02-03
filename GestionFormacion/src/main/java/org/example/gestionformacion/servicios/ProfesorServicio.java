@@ -16,10 +16,9 @@ public class ProfesorServicio {
     private ProfesorRepositorio profesorRepositorio;
 
     public Profesor findById(Integer idProfesor){
-        Profesor profesor = profesorRepositorio.findById(idProfesor)
-                .orElseThrow(()-> new RuntimeException("Ningun profesor con este ID."));
 
-        return profesor;
+        return profesorRepositorio.findById(idProfesor)
+                .orElseThrow(()-> new RuntimeException("Ningun profesor con este ID."));
     }
 
     public void crearProfesor(Profesor profesor, Rol rol) {
@@ -38,8 +37,7 @@ public class ProfesorServicio {
 
 
     public List<Profesor> listarProfesores(){
-        List<Profesor> listaProfesores = profesorRepositorio.findAll();
-        return listaProfesores;
+        return profesorRepositorio.findAll();
     }
 
     public void editarProfesor(Integer idProfesor, Profesor profesorFormulario, Rol rol) {

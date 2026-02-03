@@ -11,7 +11,6 @@
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
-        <a class="navbar-brand" th:href="@{/}">GestionFormacion</a>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav me-auto">
                 <li class="nav-item">
@@ -34,35 +33,30 @@
     </div>
 </nav>
 <div class="container mt-5">
-    <h1 class="mb-4">Lista de Profesores</h1>
+    <h1 class="mb-4">Lista de Cursos</h1>
 
-    <div th:if="${listaProfesores.isEmpty()}" class="alert alert-warning">
-        No hay profesores
+    <div th:if="${listaCurso.isEmpty()}" class="alert alert-warning">
+        No hay cursos
     </div>
 
-    <div th:unless="${listaProfesores.isEmpty()}">
+    <div th:unless="${listaCurso.isEmpty()}">
         <table class="table table-striped table-bordered">
             <thead class="table-dark">
             <tr>
-                <th>Nombre</th>
-                <th>Apellidos</th>
-                <th>Email</th>
-                <th>Rol</th>
+                <th>Nombre del curso</th>
                 <th>Acciones</th>
+
             </tr>
             </thead>
             <tbody>
-            <tr th:each="profesor : ${listaProfesores}">
-                <td th:text="${profesor.nombre}"></td>
-                <td th:text="${profesor.apellidos}"></td>
-                <td th:text="${profesor.email}"></td>
-                <td th:text="${profesor.rol}"></td>
+            <tr th:each="curso : ${listaCurso}">
+                <td th:text="${curso.nombre}"></td>
                 <td>
-                    <a th:href="@{/profesor/editar/{id}(id=${profesor.id})}"
+                    <a th:href="@{/curso/editar/{id}(id=${curso.id})}"
                        class="btn btn-sm btn-primary">Editar</a>
-                    <a th:href="@{/profesor/eliminar/{id}(id=${profesor.id})}"
+                    <a th:href="@{/curso/eliminar/{id}(id=${curso.id})}"
                        class="btn btn-sm btn-danger">Eliminar</a>
-                    <a th:href="@{/profesor/{id}(id=${profesor.id})}"
+                    <a th:href="@{/curso/ver/{id}(id=${curso.id})}"
                        class="btn btn-sm btn-success">Ver</a>
                 </td>
             </tr>
@@ -70,7 +64,7 @@
         </table>
     </div>
 
-    <a th:href="@{/profesor/crear}" class="btn btn-success mt-3">Crear nuevo profesor</a>
+    <a th:href="@{/curso/crear}" class="btn btn-success mt-3">Crear nuevo curso</a>
 </div>
 </body>
 </html>

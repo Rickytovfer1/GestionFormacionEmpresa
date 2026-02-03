@@ -1,6 +1,5 @@
 package org.example.gestionformacion.controladores;
 
-import lombok.AllArgsConstructor;
 import org.example.gestionformacion.enumerados.Rol;
 import org.example.gestionformacion.modelos.Profesor;
 import org.example.gestionformacion.servicios.ProfesorServicio;
@@ -19,7 +18,7 @@ public class ProfesorControlador {
     @GetMapping("/listaProfesores")
     public String listarProfesores(Model model){
         model.addAttribute("listaProfesores", profesorServicio.listarProfesores());
-        return "profesores";
+        return "Profesor/profesores";
     }
 
     @GetMapping("/crear")
@@ -27,7 +26,7 @@ public class ProfesorControlador {
         Profesor p = new Profesor();
         model.addAttribute("profesor",p);
 
-        return "crearProfesor";
+        return "Profesor/crearProfesor";
     }
 
     @PostMapping("/crear")
@@ -39,7 +38,7 @@ public class ProfesorControlador {
         profesorServicio.crearProfesor(profesor, rol);
 
         model.addAttribute("listaProfesores", profesorServicio.listarProfesores());
-        return "profesores";
+        return "Profesor/profesores";
     }
 
     @GetMapping("/eliminar/{id}")
@@ -52,7 +51,7 @@ public class ProfesorControlador {
     public String editarProfesor(@PathVariable Integer id, Model model){
         Profesor profesor = profesorServicio.findById(id);
         model.addAttribute("profesor", profesor);
-        return "editarProfesor";
+        return "Profesor/editarProfesor";
     }
 
     @PostMapping("/editar/{id}")
@@ -68,5 +67,11 @@ public class ProfesorControlador {
         return "redirect:/profesor/listaProfesores";
     }
 
+    @GetMapping("/ver/{id}")
+    public String verProfesor(Model model,@PathVariable Integer id){
+        Profesor profesor = profesorServicio.findById(id);
+        model.addAttribute("profesor",profesor);
 
+        return "Profesor/verProfesor";
+    }
 }

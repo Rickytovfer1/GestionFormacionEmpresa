@@ -1,8 +1,7 @@
 package org.example.gestionformacion.controladores;
 
-import org.example.gestionformacion.enumerados.Rol;
 import org.example.gestionformacion.modelos.Curso;
-import org.example.gestionformacion.modelos.Profesor;
+import org.example.gestionformacion.modelos.Empresa;
 import org.example.gestionformacion.servicios.CursoServicio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,7 +18,7 @@ public class CursoControlador {
     @GetMapping("/listaCursos")
     public String listarCursos(Model model){
         model.addAttribute("listaCurso", cursoServicio.listarCursos());
-        return "cursos";
+        return "Curso/cursos";
     }
 
     @GetMapping("/crear")
@@ -27,7 +26,7 @@ public class CursoControlador {
         Curso c = new Curso();
         model.addAttribute("curso", c);
 
-        return "crearCurso";
+        return "Curso/crearCurso";
     }
 
     @PostMapping("/crear")
@@ -37,7 +36,7 @@ public class CursoControlador {
         cursoServicio.crearCurso(curso);
 
         model.addAttribute("listaCurso", cursoServicio.listarCursos());
-        return "cursos";
+        return "Curso/cursos";
     }
 
     @GetMapping("/eliminar/{id}")
@@ -51,7 +50,7 @@ public class CursoControlador {
         Curso c = cursoServicio.findById(id);
         model.addAttribute("curso",c);
 
-        return "editarCurso";
+        return "Curso/editarCurso";
     }
 
     @PostMapping("/editar/{id}")
@@ -60,6 +59,15 @@ public class CursoControlador {
         model.addAttribute("listaCurso", cursoServicio.listarCursos());
 
         return "redirect:/curso/listaCursos";
+    }
+
+
+    @GetMapping("/ver/{id}")
+    public String verCurso(Model model,@PathVariable Integer id){
+        Curso curso = cursoServicio.findById(id);
+        model.addAttribute("curso",curso);
+
+        return "Curso/verCurso";
     }
 
 }
