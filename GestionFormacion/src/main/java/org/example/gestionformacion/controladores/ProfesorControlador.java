@@ -41,4 +41,32 @@ public class ProfesorControlador {
         model.addAttribute("listaProfesores", profesorServicio.listarProfesores());
         return "profesores";
     }
+
+    @GetMapping("/eliminar/{id}")
+    public String eliminarProfesor(@PathVariable Integer id){
+        profesorServicio.eliminarProfesor(id);
+        return "redirect:/profesor/listaProfesores";
+    }
+
+    @GetMapping("/editar/{id}")
+    public String editarProfesor(@PathVariable Integer id, Model model){
+        Profesor profesor = profesorServicio.findById(id);
+        model.addAttribute("profesor", profesor);
+        return "editarProfesor";
+    }
+
+    @PostMapping("/editar/{id}")
+    public String editarProfesor(@PathVariable Integer id,
+                                 @ModelAttribute("profesor") Profesor profesor,
+                                 @RequestParam(required = false) Boolean directiva,
+                                 Model model) {
+
+        Rol rol = Boolean.TRUE.equals(directiva) ? Rol.DIRECTIVO : Rol.NORMAL;
+
+        profesorServicio.editarProfesor(id, profesor, rol);
+
+        return "redirect:/profesor/listaProfesores";
+    }
+
+
 }
