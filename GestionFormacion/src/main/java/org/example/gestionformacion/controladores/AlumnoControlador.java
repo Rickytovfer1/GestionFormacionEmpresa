@@ -9,6 +9,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @Controller
 @RequestMapping("/alumno")
 public class AlumnoControlador {
@@ -22,6 +25,7 @@ public class AlumnoControlador {
 
     @GetMapping("/listaAlumnos")
     public String listarAlumnos(@RequestParam(required = false) Integer idCurso,
+                                @RequestParam(defaultValue = "es") String idioma,
                                 Model model) {
 
         if (idCurso != null) {
@@ -31,6 +35,43 @@ public class AlumnoControlador {
             model.addAttribute("listaAlumnos",
                     alumnoServicio.listarAlumnos());
         }
+        Map<String, String> textos = new HashMap<>();
+        if ("en".equals(idioma)) {
+            textos.put("titulo", "Students List");
+            textos.put("nombre", "First Name");
+            textos.put("apellidos", "Last Name");
+            textos.put("fechaNacimiento", "Birth Date");
+            textos.put("email", "Email");
+            textos.put("curso", "Course");
+            textos.put("acciones", "Actions");
+            textos.put("editar", "Edit");
+            textos.put("eliminar", "Delete");
+            textos.put("ver", "View");
+            textos.put("crearAlumno", "Create New Student");
+            textos.put("filtrar", "Filter");
+            textos.put("limpiar", "Clear");
+            textos.put("todosCursos", "All Courses");
+            textos.put("noAlumnos", "No students available");
+        } else {
+            textos.put("titulo", "Lista de Alumnos");
+            textos.put("nombre", "Nombre");
+            textos.put("apellidos", "Apellidos");
+            textos.put("fechaNacimiento", "Fecha de nacimiento");
+            textos.put("email", "Email");
+            textos.put("curso", "Curso");
+            textos.put("acciones", "Acciones");
+            textos.put("editar", "Editar");
+            textos.put("eliminar", "Eliminar");
+            textos.put("ver", "Ver");
+            textos.put("crearAlumno", "Crear nuevo alumno");
+            textos.put("filtrar", "Filtrar");
+            textos.put("limpiar", "Limpiar");
+            textos.put("todosCursos", "Todos los cursos");
+            textos.put("noAlumnos", "No hay alumnos");
+        }
+
+        model.addAttribute("textos", textos);
+        model.addAttribute("idioma", idioma);
 
         model.addAttribute("cursos", cursoServicio.listarCursos());
         model.addAttribute("cursoSeleccionado", idCurso);

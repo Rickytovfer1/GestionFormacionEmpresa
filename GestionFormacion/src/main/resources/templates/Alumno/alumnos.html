@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Lista de Profesores</title>
+    <title th:text="${textos.titulo}">Lista de Alumnos</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
           rel="stylesheet"
           integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
@@ -32,14 +32,13 @@
         </div>
     </div>
 </nav>
+
 <div class="container mt-5">
-    <h1 class="mb-4">Lista de Alumnos</h1>
+    <h1 th:text="${textos.titulo}">Lista de Alumnos</h1>
 
-    <div th:if="${listaAlumnos.isEmpty()}" class="alert alert-warning">
-        No hay alumnos
-    </div>
+
     <form th:action="@{/alumno/listaAlumnos}" method="get" class="row mb-4">
-
+        <!-- Selector de Curso -->
         <div class="col-md-4">
             <select name="idCurso" class="form-select">
                 <option value="">Todos los cursos</option>
@@ -48,6 +47,13 @@
                         th:text="${curso.nombre}"
                         th:selected="${curso.id == cursoSeleccionado}">
                 </option>
+            </select>
+        </div>
+
+        <div class="col-md-2">
+            <select name="idioma" class="form-select">
+                <option value="es" th:selected="${idioma == 'es'}">Español</option>
+                <option value="en" th:selected="${idioma == 'en'}">English</option>
             </select>
         </div>
 
@@ -62,18 +68,20 @@
                 Limpiar
             </a>
         </div>
-
     </form>
+
+    <div th:if="${listaAlumnos.isEmpty()}" class="alert alert-warning" th:text="${textos.noAlumnos}">No hay alumnos</div>
+
     <div th:unless="${listaAlumnos.isEmpty()}">
         <table class="table table-striped table-bordered">
             <thead class="table-dark">
             <tr>
-                <th>Nombre</th>
-                <th>Apellidos</th>
-                <th>Fecha de nacimiento</th>
-                <th>Email</th>
-                <th>Curso</th>
-                <th>Acciones</th>
+                <th th:text="${textos.nombre}">Nombre</th>
+                <th th:text="${textos.apellidos}">Apellidos</th>
+                <th th:text="${textos.fechaNacimiento}">Fecha de nacimiento</th>
+                <th th:text="${textos.email}">Email</th>
+                <th th:text="${textos.curso}">Curso</th>
+                <th th:text="${textos.acciones}">Acciones</th>
             </tr>
             </thead>
             <tbody>
@@ -84,19 +92,16 @@
                 <td th:text="${alumno.email}"></td>
                 <td th:text="${alumno.curso.nombre}"></td>
                 <td>
-                    <a th:href="@{/alumno/editar/{id}(id=${alumno.id})}"
-                       class="btn btn-sm btn-primary">Editar</a>
-                    <a th:href="@{/alumno/eliminar/{id}(id=${alumno.id})}"
-                       class="btn btn-sm btn-danger">Eliminar</a>
-                    <a th:href="@{/alumno/ver/{id}(id=${alumno.id})}"
-                       class="btn btn-sm btn-success">Ver</a>
+                    <a th:href="@{/alumno/editar/{id}(id=${alumno.id})}" class="btn btn-sm btn-primary" th:text="${textos.editar}">Editar</a>
+                    <a th:href="@{/alumno/eliminar/{id}(id=${alumno.id})}" class="btn btn-sm btn-danger" th:text="${textos.eliminar}">Eliminar</a>
+                    <a th:href="@{/alumno/ver/{id}(id=${alumno.id})}" class="btn btn-sm btn-success" th:text="${textos.ver}">Ver</a>
                 </td>
             </tr>
             </tbody>
         </table>
     </div>
 
-    <a th:href="@{/alumno/crear}" class="btn btn-success mt-3">Crear nuevo alumno</a>
+    <a th:href="@{/alumno/crear}" class="btn btn-success mt-3" th:text="${textos.crearAlumno}">Crear nuevo alumno</a>
 </div>
 </body>
 </html>
