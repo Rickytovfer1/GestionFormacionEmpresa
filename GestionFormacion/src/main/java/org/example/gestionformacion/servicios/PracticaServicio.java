@@ -14,6 +14,9 @@ public class PracticaServicio {
     @Autowired
     private PracticaRepositorio practicaRepositorio;
 
+    @Autowired
+    private EmailServicio emailServicio;
+
     public Practica findById(Integer idPractica){
 
         return practicaRepositorio.findById(idPractica)
@@ -34,7 +37,8 @@ public class PracticaServicio {
         nuevaPractica.setAlumno(practica.getAlumno());
 
         practicaRepositorio.save(nuevaPractica);
-
+        emailServicio.envioEmail(practica.getAlumno().getEmail(), practica.getAlumno().getId(),
+                practica.getEmpresa().getId(), nuevaPractica.getId());
     }
 
     public void eliminarPractica(Integer idPractica){
