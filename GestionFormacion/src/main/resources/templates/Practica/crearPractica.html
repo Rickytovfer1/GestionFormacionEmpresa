@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Crear Nuevo Profesor</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+        crossorigin="anonymous">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid">
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item">
+          <a class="nav-link" th:href="@{/profesor/listaProfesores}">Profesores</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" th:href="@{/alumno/listaAlumnos}">Alumnos</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" th:href="@{/curso/listaCursos}">Cursos</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" th:href="@{/empresa/listaEmpresas}">Empresas</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" th:href="@{/practica/listaPracticas}">Prácticas</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-6 col-md-8">
+      <div class="card shadow">
+        <div class="card-header text-center bg-primary text-white">
+          <h3>Crear Nueva Práctica</h3>
+        </div>
+        <div class="card-body">
+          <form th:action="@{/practica/crear}" th:object="${practica}" method="post">
+            <div class="mb-3">
+              <label class="form-label">Fecha de inicio:</label>
+              <input type="date" th:field="*{fechaInicio}" class="form-control" required>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Fecha de fin:</label>
+              <input type="date" th:field="*{fechaFin}" class="form-control" required>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Comentario:</label>
+              <textarea th:field="*{comentario}"
+                        class="form-control"
+                        rows="4"
+                        required>
+              </textarea>
+            </div>
+
+            <div class="mb-3">
+              <label>Alumnos:</label>
+              <select type="text" name="menu" th:field="*{alumno}"
+                      class="form-control">
+                <option th:each="alumno: ${alumnos}" th:value="${alumno.id}" th:text="${alumno.nombre}"/>
+
+              </select>
+            </div>
+
+            <div class="mb-3">
+              <label>Empresas:</label>
+              <select type="text" name="menu" th:field="*{empresa}"
+                      class="form-control">
+                <option th:each="empresa: ${empresas}" th:value="${empresa.id}" th:text="${empresa.nombre}"/>
+
+              </select>
+            </div>
+
+            <button type="submit" class="btn btn-success">Crear Practica</button>
+          </form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

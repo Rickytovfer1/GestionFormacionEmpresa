@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ver Profesor</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/profesor/listaProfesores}">Profesores</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/alumno/listaAlumnos}">Alumnos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/curso/listaCursos}">Cursos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/empresa/listaEmpresas}">Empresas</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/practica/listaPracticas}">Prácticas</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container mt-5 mb-4">
+
+    <h1 class="mb-4">Detalle de la práctica</h1>
+
+    <div class="card shadow">
+        <div class="card-body">
+
+            <div class="row mb-3">
+                <div class="col-md-3 fw-bold">Fecha de inicio:</div>
+                <div class="col-md-9" th:text="${practica.fechaInicio}"></div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-md-3 fw-bold">Fecha de fin:</div>
+                <div class="col-md-9" th:text="${practica.fechaFin}"></div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-md-3 fw-bold">Comentario:</div>
+                <div class="col-md-9" th:text="${practica.comentario}"></div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-md-3 fw-bold">Empresa:</div>
+                <div class="col-md-9" th:text="${practica.empresa.nombre}"></div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-md-3 fw-bold">Alumno:</div>
+                <div class="col-md-9" th:text="${practica.alumno.nombre + ' ' + practica.alumno.apellidos}"></div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="mt-5">
+        <a th:href="@{/practica/listaPracticas}"
+           class="btn btn-secondary">Volver</a>
+    </div>
+
+</div>
+
+</body>
+</html>
