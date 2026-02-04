@@ -58,13 +58,13 @@
         </div>
 
         <div class="col-md-2">
-            <button type="submit" class="btn btn-primary">
+            <button type="submit" class="btn btn-primary" th:text="${textos.filtrar}">
                 Filtrar
             </button>
         </div>
 
         <div class="col-md-2">
-            <a th:href="@{/alumno/listaAlumnos}" class="btn btn-secondary">
+            <a th:href="@{/alumno/listaAlumnos}" class="btn btn-secondary" th:text="${textos.limpiar}">
                 Limpiar
             </a>
         </div>
@@ -101,7 +101,21 @@
         </table>
     </div>
 
-    <a th:href="@{/alumno/crear}" class="btn btn-success mt-3" th:text="${textos.crearAlumno}">Crear nuevo alumno</a>
+    <div class="mt-3 d-flex gap-2">
+
+        <a th:href="@{/alumno/crear}"
+           class="btn btn-success"
+           th:text="${textos.crearAlumno}">
+            Crear nuevo alumno
+        </a>
+
+        <a th:href="@{/alumno/importar}"
+           class="btn btn-warning"
+           th:text="${textos.importarAlumno}">
+            Importar alumnos
+        </a>
+
+    </div>
 </div>
 </body>
 </html>

@@ -52,6 +52,8 @@ public class AlumnoControlador {
             textos.put("limpiar", "Clear");
             textos.put("todosCursos", "All Courses");
             textos.put("noAlumnos", "No students available");
+            textos.put("importarAlumno", "Import students");
+
         } else {
             textos.put("titulo", "Lista de Alumnos");
             textos.put("nombre", "Nombre");
@@ -68,6 +70,7 @@ public class AlumnoControlador {
             textos.put("limpiar", "Limpiar");
             textos.put("todosCursos", "Todos los cursos");
             textos.put("noAlumnos", "No hay alumnos");
+            textos.put("importarAlumno", "Importar alumnos");
         }
 
         model.addAttribute("textos", textos);
@@ -128,4 +131,20 @@ public class AlumnoControlador {
 
         return "Alumno/verAlumno";
     }
+
+    @GetMapping("/importar")
+    public String mostrarImportar(Model model){
+
+        model.addAttribute("cursos", cursoServicio.listarCursos());
+
+        return "Alumno/importarAlumnos";
+    }
+
+    @PostMapping("/importar")
+    public String importarAlumnos(@RequestParam Integer idCurso) {
+        alumnoServicio.importarAlumnosCSV(idCurso);
+
+        return "redirect:/alumno/listaAlumnos";
+    }
+
 }

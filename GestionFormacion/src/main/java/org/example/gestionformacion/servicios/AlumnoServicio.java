@@ -8,7 +8,12 @@ import org.example.gestionformacion.repositorios.AlumnoRepositorio;
 import org.example.gestionformacion.repositorios.CursoRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -67,6 +72,44 @@ public class AlumnoServicio {
     public List<Alumno> buscarIdCurso(Integer idCurso) {
         return alumnoRepositorio.findByCurso_Id(idCurso);
     }
+
+    public void importarAlumnosCSV(Integer idCurso) {
+
+        try {
+            Curso curso = cursoRepositorio.findById(idCurso)
+                    .orElseThrow(() -> new RuntimeException("Ningún curso con este ID."));
+
+            InputStream inputStream = getClass()
+                    .getClassLoader()
+                    .getResourceAsStream("alumnos.csv");
+
+
+            BufferedReader br = new BufferedReader(
+                    new InputStreamReader(inputStream));
+
+            String linea;
+
+            br.readLine();
+
+            while ((linea = br.readLine()) != null) {
+
+                String[] datos = linea.split(",");
+
+                Alumno alumno = new Alumno();
+                alumno.setNombre(datos[0].trim());
+                alumno.setApellidos(datos[1].trim());
+                alumno.setFechaNacimiento(LocalDate.parse(datos[2].trim()));
+                alumno.setEmail(datos[3].trim());
+                alumno.setCurso(curso);
+
+                alumnoRepositorio.save(alumno);
+            }
+
+        } catch (Exception e) {
+            throw new RuntimeException("Error al importar alumnos desde CSV", e);
+        }
+    }
+
 
 
     public AlumnoDTO findByIdRest(Integer idAlumno){
