@@ -21,8 +21,20 @@ public class AlumnoControlador {
 
 
     @GetMapping("/listaAlumnos")
-    public String listarAlumnos(Model model){
-        model.addAttribute("listaAlumnos", alumnoServicio.listarAlumnos());
+    public String listarAlumnos(@RequestParam(required = false) Integer idCurso,
+                                Model model) {
+
+        if (idCurso != null) {
+            model.addAttribute("listaAlumnos",
+                    alumnoServicio.buscarIdCurso(idCurso));
+        } else {
+            model.addAttribute("listaAlumnos",
+                    alumnoServicio.listarAlumnos());
+        }
+
+        model.addAttribute("cursos", cursoServicio.listarCursos());
+        model.addAttribute("cursoSeleccionado", idCurso);
+
         return "Alumno/alumnos";
     }
 

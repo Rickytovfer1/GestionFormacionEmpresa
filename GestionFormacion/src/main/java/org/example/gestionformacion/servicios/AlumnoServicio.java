@@ -64,6 +64,11 @@ public class AlumnoServicio {
 
     }
 
+    public List<Alumno> buscarIdCurso(Integer idCurso) {
+        return alumnoRepositorio.findByCurso_Id(idCurso);
+    }
+
+
     public AlumnoDTO findByIdRest(Integer idAlumno){
         Alumno alumno = alumnoRepositorio.findById(idAlumno)
                 .orElseThrow(()-> new RuntimeException("Ningun alumno con este ID."));
