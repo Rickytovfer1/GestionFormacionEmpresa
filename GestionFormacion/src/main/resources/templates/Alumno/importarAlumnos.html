@@ -62,7 +62,9 @@
 
                 <div class="card-body">
 
-                    <form th:action="@{/alumno/importar}" method="post">
+                    <form th:action="@{/alumno/importar}"
+                          method="post"
+                          enctype="multipart/form-data">
 
                         <div class="mb-3">
                             <label class="form-label">Curso:</label>
@@ -73,6 +75,15 @@
                                         th:text="${curso.nombre}">
                                 </option>
                             </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Archivo CSV:</label>
+                            <input type="file"
+                                   name="archivo"
+                                   class="form-control"
+                                   accept=".csv"
+                                   required>
                         </div>
 
                         <div class="d-grid">

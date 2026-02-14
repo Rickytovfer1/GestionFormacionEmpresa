@@ -73,22 +73,16 @@ public class AlumnoServicio {
         return alumnoRepositorio.findByCurso_Id(idCurso);
     }
 
-    public void importarAlumnosCSV(Integer idCurso) {
+    public void importarAlumnosCSV(Integer idCurso, MultipartFile archivo) {
 
         try {
+
             Curso curso = cursoRepositorio.findById(idCurso)
                     .orElseThrow(() -> new RuntimeException("Ningún curso con este ID."));
 
-            InputStream inputStream = getClass()
-                    .getClassLoader()
-                    .getResourceAsStream("alumnos.csv");
-
-
-            BufferedReader br = new BufferedReader(
-                    new InputStreamReader(inputStream));
+            BufferedReader br = new BufferedReader(new InputStreamReader(archivo.getInputStream()));
 
             String linea;
-
             br.readLine();
 
             while ((linea = br.readLine()) != null) {
@@ -109,7 +103,6 @@ public class AlumnoServicio {
             throw new RuntimeException("Error al importar alumnos desde CSV", e);
         }
     }
-
 
 
     public AlumnoDTO findByIdRest(Integer idAlumno){
