@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import org.example.gestionformacion.modelos.Profesor;
 import org.example.gestionformacion.repositorios.ProfesorRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.example.gestionformacion.enumerados.Rol;
 
@@ -14,6 +15,9 @@ public class ProfesorServicio {
 
     @Autowired
     private ProfesorRepositorio profesorRepositorio;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     public Profesor findById(Integer idProfesor){
 
@@ -28,7 +32,7 @@ public class ProfesorServicio {
         profesorNuevo.setApellidos(profesor.getApellidos());
         profesorNuevo.setEmail(profesor.getEmail());
 
-        profesorNuevo.setContrasena(profesor.getContrasena());
+        profesorNuevo.setContrasena(passwordEncoder.encode(profesor.getContrasena()));
 
         profesorNuevo.setRol(rol);
 
@@ -52,7 +56,7 @@ public class ProfesorServicio {
         if (profesorFormulario.getContrasena() != null &&
                 !profesorFormulario.getContrasena().isBlank()) {
 
-            profesorEditar.setContrasena(profesorFormulario.getContrasena());
+            profesorEditar.setContrasena(passwordEncoder.encode(profesorFormulario.getContrasena()));
         }
 
         profesorEditar.setRol(rol);
