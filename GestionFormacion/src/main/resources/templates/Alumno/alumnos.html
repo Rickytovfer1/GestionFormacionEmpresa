@@ -59,7 +59,7 @@
         <!-- Selector de Curso -->
         <div class="col-md-4">
             <select name="idCurso" class="form-select">
-                <option value="">Todos los cursos</option>
+                <option value="" th:text="${textos.cursos}">Todos los cursos</option>
                 <option th:each="curso : ${cursos}"
                         th:value="${curso.id}"
                         th:text="${curso.nombre}"

@@ -41,6 +41,7 @@ public class AlumnoControlador {
             textos.put("nombre", "First Name");
             textos.put("apellidos", "Last Name");
             textos.put("fechaNacimiento", "Birth Date");
+            textos.put("cursos", "All courses");
             textos.put("email", "Email");
             textos.put("curso", "Course");
             textos.put("acciones", "Actions");
@@ -59,6 +60,7 @@ public class AlumnoControlador {
             textos.put("nombre", "Nombre");
             textos.put("apellidos", "Apellidos");
             textos.put("fechaNacimiento", "Fecha de nacimiento");
+            textos.put("cursos", "Todos los cursos");
             textos.put("email", "Email");
             textos.put("curso", "Curso");
             textos.put("acciones", "Acciones");
