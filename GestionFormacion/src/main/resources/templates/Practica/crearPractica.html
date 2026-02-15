@@ -81,7 +81,7 @@
               <label>Alumnos:</label>
               <select type="text" name="menu" th:field="*{alumno}"
                       class="form-control">
-                <option th:each="alumno: ${alumnos}" th:value="${alumno.id}" th:text="${alumno.nombre}"/>
+                <option th:each="alumno: ${alumnos}" th:value="${alumno.id}" th:text="${alumno.nombre} + ' ' + ${alumno.apellidos} + ' (' + ${alumno.curso.nombre} + ')'"/>
 
               </select>
             </div>
@@ -90,7 +90,7 @@
               <label>Empresas:</label>
               <select type="text" name="menu" th:field="*{empresa}"
                       class="form-control">
-                <option th:each="empresa: ${empresas}" th:value="${empresa.id}" th:text="${empresa.nombre}"/>
+                <option th:each="empresa: ${empresas}" th:value="${empresa.id}" th:text="${empresa.nombre}" />
 
               </select>
             </div>

@@ -81,7 +81,7 @@
               <label>Alumnos:</label>
               <select type="text" name="menu" th:field="*{alumno}"
                       class="form-control">
-                <option th:each="alumno: ${alumnos}" th:value="${alumno.id}" th:text="${alumno.nombre}"/>
+                <option th:each="alumno: ${alumnos}" th:value="${alumno.id}" th:text="${alumno.nombre} + ' ' + ${alumno.apellidos} + ' (' + ${alumno.curso.nombre} + ')'"/>
 
               </select>
             </div>

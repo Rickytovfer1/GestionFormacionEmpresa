@@ -1,6 +1,5 @@
 package org.example.gestionformacion.servicios;
 
-import org.example.gestionformacion.modelos.Alumno;
 import org.example.gestionformacion.modelos.Practica;
 import org.example.gestionformacion.repositorios.PracticaRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +27,13 @@ public class PracticaServicio {
     }
 
     public void crearPractica(Practica practica){
+
+        Integer idAlumno = practica.getAlumno().getId();
+
+        if (practicaRepositorio.existsByAlumno_Id(idAlumno)){
+            throw new RuntimeException("El alumno ya tiene una práctica asignada.");
+        }
+
         Practica nuevaPractica = new Practica();
 
         nuevaPractica.setFechaInicio(practica.getFechaInicio());
