@@ -68,7 +68,7 @@
 
             <div class="row mb-3">
                 <div class="col-md-3 fw-bold">Fecha de nacimiento:</div>
-                <div class="col-md-9" th:text="${alumno.fechaNacimiento}"></div>
+                <div class="col-md-9" th:text="${#temporals.format(alumno.fechaNacimiento, 'dd/MM/yyyy')}"></div>
             </div>
 
             <div class="row mb-3">

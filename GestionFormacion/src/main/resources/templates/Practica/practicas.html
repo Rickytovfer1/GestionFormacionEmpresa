@@ -71,8 +71,8 @@
             </thead>
             <tbody>
             <tr th:each="practica : ${listaPracticas}">
-                <td th:text="${practica.fechaInicio}"></td>
-                <td th:text="${practica.fechaFin}"></td>
+                <td th:text="${#temporals.format(practica.fechaInicio, 'dd/MM/yyyy')}"></td>
+                <td th:text="${#temporals.format(practica.fechaFin, 'dd/MM/yyyy')}" ></td>
                 <td th:text="${practica.empresa.nombre}"></td>
                 <td th:text="${practica.alumno.nombre + ' ' + practica.alumno.apellidos}"></td>
                 <td>
